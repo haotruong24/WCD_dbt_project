@@ -1,0 +1,1 @@
+select * from {{source('tpcds','date_dim')}}

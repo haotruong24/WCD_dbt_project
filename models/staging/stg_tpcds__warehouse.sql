@@ -1,0 +1,16 @@
+SELECT W_ZIP as zip, 
+W_WAREHOUSE_NAME as warehouse_name,
+ W_STREET_NAME as street_name,
+  W_STATE as state, 
+  W_CITY as city, 
+  W_COUNTY as county, 
+  W_STREET_TYPE as street_type, 
+  W_WAREHOUSE_SQ_FT as warehouse_sq_ft, 
+  W_SUITE_NUMBER as Suite_number, 
+  W_STREET_NUMBER as street_number, 
+  W_COUNTRY as country, 
+  W_WAREHOUSE_SK as warehouse_sk, 
+  W_GMT_OFFSET as GMT_offset, 
+  W_WAREHOUSE_ID as warehouse_id,
+_AIRBYTE_NORMALIZED_AT
+From {{source('tpcds','warehouse')}}

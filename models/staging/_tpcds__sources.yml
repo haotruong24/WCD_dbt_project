@@ -1,0 +1,25 @@
+version: 2
+
+sources:
+  - name: tpcds
+    database: tpcds
+    schema: RAW
+    tables:
+      - name: call_center
+      - name: catalog_page
+      - name: catalog_sales
+      - name: customer
+      - name: customer_address
+      - name: customer_demographics
+      - name: date_dim
+      - name: household_demographics
+      - name: income_band
+      - name: inventory
+      - name: item
+      - name: promotion
+      - name: ship_mode
+      - name: time_dim
+      - name: warehouse
+      - name: web_page
+      - name: web_sales
+      - name: web_site

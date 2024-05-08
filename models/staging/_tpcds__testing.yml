@@ -1,0 +1,69 @@
+version: 2
+
+models:
+  - name: stg_tpcds__catalog_sales
+    description: Check Order_Number and Net_profit of Catalog_sales to ensure not null. Assume business data requirement that Order_number and Net_profit cannot be Null
+    columns:
+      - name: Order_Number
+        tests:
+          - not_null
+      - name: NET_PROFIT
+        tests:
+          - not_null
+
+  - name: stg_tpcds__web_sales
+    description: Check Order_Number and Net_profit of web_sales to ensure not null. Assume business data requirement that Order_number and Net_profit cannot be Null
+    columns:
+      - name: Order_Number
+        tests:
+          - not_null
+      - name: NET_PROFIT
+        tests:
+          - not_null
+  
+  - name: stg_tpcds__inventory
+    description: Check Item_SK of inventory to ensure not null.
+    columns:
+      - name: Item_SK
+        tests:
+          - not_null
+
+  - name: stg_tpcds__customer
+    description: Customer_sk must be unique and not null (primary key)
+    columns:
+      - name: customer_sk
+        tests:
+          - not_null
+          - unique
+
+      - name: current_addr_sk
+        description: Check relationship between Customer and customer_address table
+        tests:
+          - relationships:
+              to: ref('stg_tpcds__customer_address')
+              field: address_sk
+
+      - name: CURRENT_CDEMO_SK
+        description: Check relationship between Customer and customer_demographics table -> Faik due to not all customer has demographics data
+        tests:
+          - relationships:
+              to: ref('stg_tpcds__customer_demographics')
+              field: DEMO_SK
+              config:
+                severity: warn
+      
+      - name: CURRENT_HDEMO_SK
+        description: Check relationship between Customer and customer_demographics table
+        tests:
+          - relationships:
+              to: ref('stg_tpcds__household_demographics')
+              field: DEMO_SK
+
+  - name: stg_tpcds__household_demographics
+    columns:
+      - name: INCOME_BAND_SK
+        description: Check relationship between household_demographic and Income_band table
+        tests:
+          - relationships:
+              to: ref('stg_tpcds__income_band')
+              field: INCOME_BAND_SK
